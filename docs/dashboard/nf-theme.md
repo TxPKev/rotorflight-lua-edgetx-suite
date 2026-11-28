@@ -103,7 +103,9 @@ The page after the cockpit:
 
 The values are read from the flight controller through the suite's MSP service when the page
 opens, and again after a change of bank or rate profile; a read that fails is tried again three
-seconds later. The page only reads: it changes nothing on the flight controller.
+seconds later. While the model is armed the page asks nothing: after a change of bank or rate
+profile in flight, what belongs to the new one reads `--` until the page reads again on the
+ground. The page only reads: it changes nothing on the flight controller.
 
 ## Full screen
 
