@@ -106,7 +106,7 @@ return function(T)
     function P.client()                               -- a place at the suite's MSP service (rfsuite.msp) while replies are awaited; T.mspRelease gives it back
         local m = T.mspSlot()
         if (m.client == nil or m.client.released) and rfsuite and type(rfsuite.msp) == "table" and type(rfsuite.msp.register) == "function" then
-            local ok, k = pcall(rfsuite.msp.register, "nf-theme")
+            local ok, k = pcall(rfsuite.msp.register, "nf-theme", 2)   -- 2: the service version the theme is written against (tasks/msp/service.lua VERSION); an older service refuses
             if ok and type(k) == "table" then m.client, m.pending = k, 0 end
         end
         return m.client
