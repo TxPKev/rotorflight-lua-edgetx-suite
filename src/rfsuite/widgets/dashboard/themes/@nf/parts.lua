@@ -269,11 +269,11 @@ local function directionTick(deg, isArmed)   -- the direction arrow: the referen
         if not r.captured then r.ref = nil end
         return
     end
-    if isArmed then
+    if isArmed == true then
         if not r.captured then r.ref = deg end
         r.captured = true
     else
-        r.captured = false
+        if isArmed == false then r.captured = false end   -- only a confirmed disarm lets go of the flight's reference; nil is an arm state not yet known
         if r.ref == nil then r.ref = deg end
     end
 end
@@ -378,7 +378,7 @@ function T.read(state)   -- reads the suite's state: s is the moment (G.s), and 
             if s.rpm > sl.max then sl.max = s.rpm end
         end
     end
-    directionTick(s.deg, s.isArmed == true)
+    directionTick(s.deg, s.isArmed)
     local r = G.direction
     s.angle = (r.ref ~= nil and s.deg ~= nil) and (s.deg - r.ref) % 360 or nil
     G.s = s
